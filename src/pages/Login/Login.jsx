@@ -1,16 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '../../Components/Navbar/Navbar';
 import { useForm } from 'react-hook-form';
+import userData from '../../data/user.json'
+import useAuth from '../../hooks/useAuth';
 
 
 
 function Login() {
+    const [user,setUser]=useAuth()
+    const [loginError,setLoginError]=useState("")
     const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm()
-  const onSubmit = (data) => console.log(data)
+  const onSubmit = (data) => processLogin(data)
+  
+
+const processLogin = (formData) => {
+   
+    const tempUser = userData.find(u => u.gmail === formData.gmail && u.password === formData.password)||{}
+    console.log(tempUser)
+    if (tempUser) {
+        setUser(tempUser);
+        localStorage.setItem('uId', tempUser.id);
+        setLoginError("");
+        alert('form submitted')
+        
+    } else {
+        setLoginError("User Email or Password not Match");
+    }
+};
     return (
         <div>
             <Navbar/>
@@ -27,6 +47,7 @@ function Login() {
 
       <input type="submit" value={"Login"} className="rounded-sm w-full bg-emerald-600 py-2 text-white"/>
     </form>
+    <p className='text-red-400'>{loginError}</p>
         </div>
     );
 }
