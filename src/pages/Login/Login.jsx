@@ -6,12 +6,14 @@ import useAuth from '../../hooks/useAuth';
 
 
 
+
 function Login() {
-    const [user,setUser]=useAuth()
+    const {user,setUser}=useAuth()
     const [loginError,setLoginError]=useState("")
     const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm()
   const onSubmit = (data) => processLogin(data)
@@ -19,17 +21,18 @@ function Login() {
 
 const processLogin = (formData) => {
    
-    const tempUser = userData.find(u => u.gmail === formData.gmail && u.password === formData.password)||{}
-    console.log(tempUser)
+    const tempUser = userData.find(u => u.gmail === formData.gmail && u.password === formData.password)
+   
     if (tempUser) {
         setUser(tempUser);
         localStorage.setItem('uId', tempUser.id);
         setLoginError("");
         alert('form submitted')
-        
+        reset()
     } else {
         setLoginError("User Email or Password not Match");
     }
+    
 };
     return (
         <div>

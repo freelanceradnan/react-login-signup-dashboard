@@ -1,11 +1,14 @@
 import React from 'react';
 import Navbar from '../../Components/Navbar/Navbar';
+import useAuth from '../../hooks/useAuth';
 
 function Home() {
+    const {user}=useAuth()
+    
     return (
         <div>
             <Navbar/>
-            this is home
+            {user.gmail?`welcome ${user.name}`:<><h2>Homepage</h2></>}
         </div>
     );
 }
