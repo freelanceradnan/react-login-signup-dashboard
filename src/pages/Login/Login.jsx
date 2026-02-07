@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../../Components/Navbar/Navbar';
 import { useForm } from 'react-hook-form';
 import userData from '../../data/user.json'
 import useAuth from '../../hooks/useAuth';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 
 
 function Login() {
+    let navigate=useNavigate()
+    let location=useLocation()
+    let from=location?.state?.from?.pathname||"/"
     const {user,setUser}=useAuth()
+    useEffect(()=>{
+   user.gmail && navigate(from,{replace:true})
+    },[from,navigate,user.gmail])
     const [loginError,setLoginError]=useState("")
     const {
     register,

@@ -8,14 +8,14 @@ export const useCredential = () => {
     const userData = () => {
         const fetchData = async () => {
             try {
-                // Change === to == to handle String vs Number
+               
                 const tempUser = userDetails.find(user => user.id == id) || {};
                 setUser(tempUser);
             } catch (error) {
-                console.log(error); // fixed 'err' to 'error'
+                console.log(error); 
             }
         };
-        fetchData(); // <--- ADD THIS: Actually run the function you just defined
+        fetchData(); 
     };
 
     useEffect(() => {

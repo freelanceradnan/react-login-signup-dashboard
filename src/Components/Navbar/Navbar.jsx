@@ -1,8 +1,9 @@
 import React, { useState } from "react"; 
 import { Link, NavLink } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
-
+  const {user}=useAuth()
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -38,9 +39,16 @@ const Navbar = () => {
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
                   <NavLink to="/home" className={({ isActive }) => isActive ? "p-2 m-2 bg-green-500 text-black rounded" : "text-white p-2 m-2"}>Home</NavLink>
-                  <NavLink to="/login" className={({ isActive }) => isActive ? "p-2 m-2 bg-green-500 text-black rounded" : "text-white p-2 m-2"}>Login</NavLink>
-                  <NavLink to="/signup" className={({ isActive }) => isActive ? "p-2 m-2 bg-green-500 text-black rounded" : "text-white p-2 m-2"}>Singup</NavLink>
+                 
+                 {user.gmail ?
                   <NavLink to="/dashboard" className={({ isActive }) => isActive ? "p-2 m-2 bg-green-500 text-black rounded" : "text-white p-2 m-2"}>Dashboard</NavLink>
+                  :
+                  <>
+                   <NavLink to="/login" className={({ isActive }) => isActive ? "p-2 m-2 bg-green-500 text-black rounded" : "text-white p-2 m-2"}>Login</NavLink>
+                  <NavLink to="/signup" className={({ isActive }) => isActive ? "p-2 m-2 bg-green-500 text-black rounded" : "text-white p-2 m-2"}>Singup</NavLink>
+                  
+                  </>
+                 }
                 </div>
               </div>
             </div>
