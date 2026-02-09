@@ -4,7 +4,7 @@ import useAuth from '../../hooks/useAuth';
 
 function Home() {
     const {user}=useAuth()
-    
+    console.log(user)
     return (
         <div>
             <Navbar/>

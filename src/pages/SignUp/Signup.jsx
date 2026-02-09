@@ -49,7 +49,9 @@ user.gmail && navigate(from,{replace:true})
             
             const result = await signInWithPopup(auth, provider);
             const user = result.user;
-            // console.log("Success:", user);
+
+            // console.log("result:", user);
+            
             alert(`Welcome ${user.displayName}!`);
             const tempUser={
                 id:user.uid,
@@ -57,15 +59,17 @@ user.gmail && navigate(from,{replace:true})
                 name:user.displayName,
                 image:user.photoURL
             }
-            setUser(tempUser)
+            setUser({...tempUser})
+            // console.log(tempUser)
+            
             localStorage.setItem('uId',tempUser.id)
-            console.log(tempUser.id)
+           
         } catch (error) {
             console.error("Error during sign-in:", error.message);
     
         }
     };
-
+ 
     return (
         <div className="min-h-screen bg-gray-50">
             <Navbar />
